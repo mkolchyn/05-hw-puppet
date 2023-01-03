@@ -6,10 +6,10 @@ node master {
  
   include nginx
   
-  nginx::resource::server { '1kibana.myhost.com':
-    listen_port => 80,
-    proxy => 'http://192.168.50.26:80',
-  }
+  #nginx::resource::server { '1kibana.myhost.com':
+  #  listen_port => 80,
+  #  proxy => 'http://192.168.50.26:80',
+  #}
 
 }
 
@@ -19,8 +19,8 @@ node slave1 {
     name   => httpd,
   }
   file { '/var/www/html/index.html':
-     ensure => present,
-     source => "/vagrant/index.html",
+    ensure => present,
+    source => "/vagrant/index.html",
   }
   service { 'httpd':
     ensure => running,
@@ -42,8 +42,8 @@ node slave2 {
     name   => php,
   }
   file { '/var/www/html/index.php':
-          ensure => present,
-          source => "/vagrant/index.php",
+    ensure => present,
+    source => "/vagrant/index.php",
   }
   service { 'php-fpm':
     ensure => running,
