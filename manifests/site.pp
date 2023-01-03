@@ -6,16 +6,15 @@ node master {
  
   include nginx
   
-  #nginx::resource::server { '192.168.50.25':
-  #  listen_port => 80,
-  #  proxy => 'http://192.168.50.26',
-  #}
+  nginx::resource::server { '192.168.50.25':
+    listen_port => 80,
+    proxy => 'http://192.168.50.26',
+  }
   
-  #nginx::resource::server { '192.168.50.25:81':
-  #  listen_port => 80,
-  #  proxy => 'http://192.168.50.27',
-  #}
-
+  nginx::resource::server { '192.168.50.25:81':
+    listen_port => 80,
+    proxy => 'http://192.168.50.27',
+  }
 }
 
 node slave1 {
