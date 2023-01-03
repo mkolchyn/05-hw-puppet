@@ -6,6 +6,18 @@ node master {
   file { '/etc/puppetlabs/puppet/puppet.conf':
     content => "[server]\nvardir = /opt/puppetlabs/server/data/puppetserver\nlogdir = /var/log/puppetlabs/puppetserver\nrundir = /var/run/puppetlabs/puppetserver\npidfile = /var/run/puppetlabs/puppetserver/puppetserver.pid\ncodedir = /etc/puppetlabs/code\nautosign = true\n\n[agent]\nserver = master\nruninterval = 1m",
   }
+  
+  include nginx
+  
+  nginx::resource::server { '1kibana.myhost.com':
+    listen_port => 80,
+    proxy => 'http://192.168.50.26:80',
+  }
+  
+  nginx::resource::server { '2kibana.myhost.com':
+    listen_port => 81,
+    proxy => 'http://192.168.50.27:80',
+  }
 }
 
 node slave1 {
