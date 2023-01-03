@@ -6,12 +6,12 @@ node master {
  
   include nginx
   
-  nginx::resource::server { '1kibana.myhost.com':
+  nginx::resource::server { '192.168.50.25:80':
     listen_port => 80,
     proxy => 'http://192.168.50.26:80',
   }
   
-  nginx::resource::server { '2kibana.myhost.com':
+  nginx::resource::server { '192.168.50.25:81':
     listen_port => 81,
     proxy => 'http://192.168.50.27:80',
   }
