@@ -106,6 +106,6 @@ node mineserver.puppet {
     cwd     => '/opt/minecraft/mcrcon',
     command => 'make install',
     path    => "/usr/bin",
-    require => Exec['install mcrcon'],
+    require => Exec['make mcrcon'],
   }
 }
