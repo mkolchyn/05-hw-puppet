@@ -3,5 +3,8 @@ node mineserver.puppet {
     ensure => stopped,
     enable => false,
   }
-  include minecraft
+  package { 'httpd':
+    ensure => installed,
+    name   => httpd,
+  }  
 }
