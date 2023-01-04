@@ -69,8 +69,16 @@ node mineserver.puppet {
     enable => false,
   }
   package {  'java':
-    name => java-17-openjdk.x86_64,
+    name   => java-17-openjdk,
     ensure => present,
-  } 
+  }
+  file { '/opt/minecraft':
+    ensure => directory,
+  }
+  wget::fetch {
+    source      => 'wget https://piston-data.mojang.com/v1/objects/c9df48efed58511cdd0213c56b9013a7b5c9ac1f/server.jar',
+    destination => '/opt/minecraft',
+  }
+  
  
 }
