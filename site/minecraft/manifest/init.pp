@@ -4,10 +4,10 @@ class minecraft {
     ensure => present,
   }
   
-  file { '/etc/systemd/system/minecraft.service':
-    ensure => file,
-    source => 'puppet:///modules/minecraft/minecraft.service',
-  }
+#  file { '/etc/systemd/system/minecraft.service':
+#    ensure => file,
+#    source => 'puppet:///modules/minecraft/minecraft.service',
+#  }
   
   file { '/opt/minecraft':
     ensure => directory,
