@@ -6,7 +6,7 @@ class minecraft {
   
   file { '/etc/systemd/system/minecraft.service':
     ensure => file,
-    source => 'puppet:///site/minecraft/files/minecraft.service',
+    source => 'puppet:///modules/minecraft/minecraft.service',
   }
   
   file { '/opt/minecraft':
