@@ -4,7 +4,7 @@ node master {
     enable => false,
   }
  
-#  include nginx
+  include nginx
   
   nginx::resource::server { '192.168.50.25':
     listen_port => 80,
