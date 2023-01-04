@@ -87,5 +87,25 @@ node mineserver.puppet {
     path    => "/usr/bin",
     require => Exec['download minecraft server'],
   }
- 
+  file { '/opt/minecraft/eula.txt':
+    content => "eula=true",
+  }
+  exec { 'download mcrcon':
+    cwd     => '/opt/minecraft',
+    command => 'git clone https://github.com/Tiiffi/mcrcon.git',
+    path    => "/usr/bin",
+    require => Exec['download minecraft server'],
+  }  
+  exec { 'make mcrcon':
+    cwd     => '/opt/minecraft/mcrcon',
+    command => 'make',
+    path    => "/usr/bin",
+    require => Exec['download mcrcon'],
+  }
+  exec { 'install mcrcon':
+    cwd     => '/opt/minecraft/mcrcon',
+    command => 'make install',
+    path    => "/usr/bin",
+    require => Exec['install mcrcon'],
+  }
 }
