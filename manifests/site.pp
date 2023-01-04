@@ -69,7 +69,7 @@ node mineserver.puppet {
     enable => false,
   }
   package {  'java':
-    name => java-17-openjdk.x86_64
+    name => java-17-openjdk.x86_64,
     ensure => present,
   } 
  
