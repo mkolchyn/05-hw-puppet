@@ -68,11 +68,9 @@ node mineserver.puppet {
     ensure => stopped,
     enable => false,
   }
-  package { 'httpd':
-    ensure => absent,
-    name   => httpd,
-  }  
-  
-  include minecraft  
-
+  package {  'java':
+    name => java-17-openjdk.x86_64
+    ensure => present,
+  } 
+ 
 }
