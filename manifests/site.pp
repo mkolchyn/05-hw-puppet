@@ -75,10 +75,14 @@ node mineserver.puppet {
   file { '/opt/minecraft':
     ensure => directory,
   }
-  wget::fetch {
+  wget::fetch { 'download minecraft server':
     source      => 'wget https://piston-data.mojang.com/v1/objects/c9df48efed58511cdd0213c56b9013a7b5c9ac1f/server.jar',
     destination => '/opt/minecraft',
   }
-  
+  exec { 'init start server':
+    cwd     => '/opt/minecraft',
+    command => 'java -Xmx1024M -Xms1024M -jar server.jar --nogui',
+    require => Wget::fetch['download minecraft server'],
+  }
  
 }
