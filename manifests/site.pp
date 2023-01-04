@@ -82,7 +82,6 @@ node mineserver.puppet {
   exec { 'init start server':
     cwd     => '/opt/minecraft',
     command => 'java -Xmx1024M -Xms1024M -jar server.jar --nogui',
-    require => Wget::fetch['download minecraft server'],
   }
  
 }
