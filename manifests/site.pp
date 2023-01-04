@@ -63,15 +63,16 @@ node slave2 {
   }
 }
 
-
-
 node mineserver.puppet {
   service { 'firewalld':
     ensure => stopped,
     enable => false,
   }
   package { 'httpd':
-    ensure => installed,
+    ensure => absent,
     name   => httpd,
   }  
+  
+  include minecraft  
+
 }
