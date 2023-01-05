@@ -36,6 +36,7 @@ class minecraft {
   exec { 'install mcrcon':
     cwd     => '/opt/minecraft/mcrcon',
     path    => "/usr/bin",
+    command => 'make install',
     unless  => 'test -x /usr/local/bin/mcrcon',   
   }
   file { '/opt/minecraft/server.properties':
