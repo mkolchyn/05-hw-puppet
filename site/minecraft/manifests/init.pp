@@ -23,7 +23,7 @@ class minecraft {
 #    content => "eula=true",
 #  }
 
-  git::repo{'clone mcrcon':
+  git::repo { 'clone mcrcon':
     path   => '/opt/minecraft/mcrcon',
     source => 'git://github.com/Tiiffi/mcrcon.git'
   }
@@ -31,7 +31,7 @@ class minecraft {
 #    ensure   => present,
 #    provider => git,
 #    source   => 'git://github.com/Tiiffi/mcrcon.git',
-  }
+#  }
  
 #  exec { 'make mcrcon':
 #    cwd     => '/opt/minecraft/mcrcon',
