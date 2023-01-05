@@ -17,7 +17,6 @@ class minecraft {
     cwd     => '/opt/minecraft',
     command => 'java -Xmx1024M -Xms1024M -jar server.jar --nogui',
     path    => "/usr/bin",
-    require => Exec['download minecraft server'],
     unless  => 'test -e /opt/minecraft_2/eula.txt',
   }
   file { '/opt/minecraft/eula.txt':
