@@ -68,46 +68,6 @@ node mineserver.puppet {
     ensure => stopped,
     enable => false,
   }
-  package {  'java':
-    name   => java-17-openjdk,
-    ensure => present,
-  }
-  file { '/opt/minecraft':
-    ensure => directory,
-  }
-  exec { 'download minecraft server':
-    cwd     => '/opt/minecraft',
-    command => 'wget https://piston-data.mojang.com/v1/objects/c9df48efed58511cdd0213c56b9013a7b5c9ac1f/server.jar',
-    path    => "/usr/bin",
-    require => File['/opt/minecraft'],  
-  }
-  exec { 'init start server':
-    cwd     => '/opt/minecraft',
-    command => 'java -Xmx1024M -Xms1024M -jar server.jar --nogui',
-    path    => "/usr/bin",
-    require => Exec['download minecraft server'],
-  }
-  file { '/opt/minecraft/eula.txt':
-    content => "eula=true",
-  }
-  exec { 'download mcrcon':
-    cwd     => '/opt/minecraft',
-    command => 'git clone https://github.com/Tiiffi/mcrcon.git',
-    path    => "/usr/bin",
-    require => Exec['download minecraft server'],
-  }  
-  exec { 'make mcrcon':
-    cwd     => '/opt/minecraft/mcrcon',
-    command => 'make',
-    path    => "/usr/bin",
-    require => Exec['download mcrcon'],
-  }
-  exec { 'install mcrcon':
-    cwd     => '/opt/minecraft/mcrcon',
-    command => 'make install',
-    path    => "/usr/bin",
-    require => Exec['make mcrcon'],
-  }
   
   include minecraft
 }
