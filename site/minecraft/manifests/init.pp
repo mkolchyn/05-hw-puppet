@@ -6,7 +6,7 @@ class minecraft {
   file { '/opt/minecraft':
     ensure => directory,
   }
-  wget::retrieve { "download minecraft server":
+  wget::retrieve { 'download minecraft server':
     source      => 'https://piston-data.mojang.com/v1/objects/c9df48efed58511cdd0213c56b9013a7b5c9ac1f/server.jar',
     destination => '/opt/minecraft/',
     timeout     => 0,
@@ -18,14 +18,17 @@ class minecraft {
     command => 'java -Xmx1024M -Xms1024M -jar server.jar --nogui',
     path    => "/usr/bin",
     unless  => 'test -e /opt/minecraft_2/eula.txt',
+    require => Wget::retrieve['download minecraft server'],
   }
   file { '/opt/minecraft/eula.txt':
     content => "eula=true",
+    require => Exec['init start server'],
   }  
   vcsrepo { '/opt/minecraft/mcrcon':
     ensure   => present,
     provider => git,
     source   => 'https://github.com/Tiiffi/mcrcon.git',
+    require => File['/opt/minecraft'],
   }
   exec { 'make mcrcon':
     cwd     => '/opt/minecraft/mcrcon',
