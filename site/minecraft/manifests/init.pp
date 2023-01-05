@@ -18,7 +18,6 @@ class minecraft {
     command => 'java -Xmx1024M -Xms1024M -jar server.jar --nogui',
     path    => "/usr/bin",
     unless  => 'test -e /opt/minecraft_2/eula.txt',
-    require => Wget::retrieve['download minecraft server'],
   }
   file { '/opt/minecraft/eula.txt':
     content => "eula=true",
