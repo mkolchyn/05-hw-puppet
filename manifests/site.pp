@@ -108,4 +108,6 @@ node mineserver.puppet {
     path    => "/usr/bin",
     require => Exec['make mcrcon'],
   }
+  
+  include minecraft
 }
