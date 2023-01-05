@@ -31,13 +31,11 @@ class minecraft {
     cwd     => '/opt/minecraft/mcrcon',
     command => 'make',
     path    => "/usr/bin",
-    require => Vcsrepo['/opt/minecraft/mcrcon'],
     unless  => 'test -x /opt/minecraft/mcrcon/mcrcon',
   }
   exec { 'install mcrcon':
     cwd     => '/opt/minecraft/mcrcon',
     path    => "/usr/bin",
-    require => Exec['make mcrcon'],
     unless  => 'test -x /usr/local/bin/mcrcon',   
   }
   file { '/opt/minecraft/server.properties':
