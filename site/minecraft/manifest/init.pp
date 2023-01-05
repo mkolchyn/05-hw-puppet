@@ -1,5 +1,6 @@
 class minecraft {
-  file { '/opt/minecraft':
-    ensure => directory,
+  file { '/etc/systemd/system/minecraft.service':
+    ensure => file,
+    source => 'puppet:///site/minecraft/minecraft.service',
   }
 }
