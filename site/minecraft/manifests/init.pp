@@ -13,7 +13,34 @@ class minecraft {
     verbose     => false,
     require => File['/opt/minecraft'],  
   }
-
+#  exec { 'init start server':
+#    cwd     => '/opt/minecraft',
+#    command => 'java -Xmx1024M -Xms1024M -jar server.jar --nogui',
+#    path    => "/usr/bin",
+#   require => Wget::retrieve['download minecraft server'],
+#  }
+#  file { '/opt/minecraft/eula.txt':
+#    content => "eula=true",
+#  }
+  vcsrepo { '/opt/minecraft':
+    ensure   => present,
+    provider => git,
+    source   => 'git://github.com/Tiiffi/mcrcon.git',
+  }
+ 
+#  exec { 'make mcrcon':
+#    cwd     => '/opt/minecraft/mcrcon',
+#   command => 'make',
+#   path    => "/usr/bin",
+#   require => Exec['download mcrcon'],
+# }
+#  exec { 'install mcrcon':
+#    cwd     => '/opt/minecraft/mcrcon',
+#    path    => "/usr/bin",
+#    require => Exec['make mcrcon'],
+#  }
+  
+  
   file { '/opt/minecraft/server.properties':
     ensure => file,
     source => 'puppet:///modules/minecraft/server.properties',
