@@ -23,15 +23,12 @@ class minecraft {
 #    content => "eula=true",
 #  }
 
-  git::repo { 'clone mcrcon':
-    path   => '/opt/minecraft/mcrcon',
-    source => 'git://github.com/Tiiffi/mcrcon.git'
-  }
-#  vcsrepo { '/opt/minecraft/mcrcon':
-#    ensure   => present,
-#    provider => git,
+  vcsrepo { '/opt/minecraft/mcrcon':
+    ensure   => present,
+    provider => git,
+    source   => 'https://github.com/Tiiffi/mcrcon.git',
 #    source   => 'git://github.com/Tiiffi/mcrcon.git',
-#  }
+  }
  
 #  exec { 'make mcrcon':
 #    cwd     => '/opt/minecraft/mcrcon',
