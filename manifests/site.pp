@@ -3,19 +3,23 @@ node master {
     ensure => stopped,
     enable => false,
   }
- 
-  include nginx
   
+  include nginx
+
   nginx::resource::server { '192.168.50.25':
     listen_port => 80,
     proxy => 'http://192.168.50.26',
   }
-  
   nginx::resource::server { '192.168.50.25:81':
     listen_port => 81,
     proxy => 'http://192.168.50.27',
   }
+  exec { 'config SELinux Booleans':
+    command => 'setsebool -P httpd_can_network_connect on',
+    path    => "/usr/bin",
+  }
 }
+
 
 node slave1 {
   package { 'httpd':
@@ -35,6 +39,7 @@ node slave1 {
     enable => false,
   }
 }
+
 
 node slave2 {
   package { 'httpd':
@@ -62,6 +67,7 @@ node slave2 {
     enable => false,
   }
 }
+
 
 node mineserver.puppet {
   service { 'firewalld':
