@@ -10,7 +10,7 @@ class minecraft {
     source => 'puppet:///modules/minecraft/minecraft.service',
     require => File['/opt/minecraft/server.properties'],    
   }
-  service { 'firewalld':
+  service { 'minecraft.service':
     ensure => running,
     enable => true,
     require => File['/etc/systemd/system/minecraft.service'],
