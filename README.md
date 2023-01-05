@@ -1,5 +1,7 @@
 # 05-puppet
 
+setsebool -P httpd_can_network_connect 1
+
 yum -y install java-17-openjdk.x86_64
 mkdir /opt/minecraft
 wget https://piston-data.mojang.com/v1/objects/c9df48efed58511cdd0213c56b9013a7b5c9ac1f/server.jar
